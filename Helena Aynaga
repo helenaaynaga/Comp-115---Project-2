@@ -1,0 +1,161 @@
+import turtle
+
+def draw_circles(t, num_circles, size, decrease_amount):
+    for _ in range(num_circles):
+        t.circle(size)
+        size -= decrease_amount
+
+def draw_special(t, size, repeat, num_circles, decrease_amount):
+    for _ in range(repeat):
+        draw_circles(t, num_circles, size, decrease_amount)
+        t.right(360 / repeat)
+
+def draw_sun_with_rays():
+    # turtle for sun
+    sun = turtle.Turtle()
+    sun.speed(1)  
+
+    # drawing the sun
+    sun.penup()
+    sun.goto(200, 140)
+    sun.pendown()
+    sun.begin_fill()
+    sun.color("yellow")
+    sun.circle(60)
+    sun.end_fill()
+
+    # for loop for sun rays
+    for _ in range(12):
+        sun.penup()
+        sun.goto(200, 200)
+        sun.pendown()
+        sun.setheading(30 * _)
+        sun.forward(120)  # sun ray length
+        sun.pensize(4)  # thickness of rays
+        sun.backward(120)  # reset turtle
+
+    sun.hideturtle()
+
+# screen set up
+wn = turtle.Screen()
+wn.setup(width=800, height=600)
+wn.tracer(0)  # no more screen updates
+
+# sky, beach, sand split
+split_y = -180  
+
+# creating turtle for sky
+sky = turtle.Turtle()
+sky.speed(1)  
+
+# creating turtle for beach
+beach = turtle.Turtle()
+beach.speed(1)  
+
+# creating turtle for water
+water = turtle.Turtle()
+water.speed(1) 
+
+# creating turtle for fish 1,2,3
+fish1 = turtle.Turtle()
+fish1.speed(1)  
+
+
+fish2 = turtle.Turtle()
+fish2.speed(1) 
+
+fish3 = turtle.Turtle()
+fish3.speed(1)  
+
+# turtle for seashells 1 and 2
+seashell1 = turtle.Turtle()
+seashell1.speed(1)  
+
+seashell2 = turtle.Turtle()
+seashell2.speed(1)  
+
+# Sky drawing
+sky.penup()
+sky.goto(0, split_y)
+sky.pendown()
+sky.begin_fill()
+sky.color("lightblue")
+sky.goto(400, split_y)
+sky.goto(400, 300)
+sky.goto(-400, 300)
+sky.goto(-400, split_y)
+sky.end_fill()
+
+# Beach drawing
+beach.penup()
+beach.goto(0, split_y)
+beach.pendown()
+beach.begin_fill()
+beach.color("tan")
+beach.goto(400, split_y)
+beach.goto(400, -300)
+beach.goto(-400, -300)
+beach.goto(-400, split_y)
+beach.end_fill()
+
+# dark blue water drawing
+water.penup()
+water.goto(0, split_y)
+water.pendown()
+water.begin_fill()
+water.color("darkblue")
+water.goto(400, split_y)
+water.goto(400, 0)  # thickness of water 
+water.goto(-400, 0)  
+water.goto(-400, split_y)
+water.end_fill()
+
+# Fish drawings
+def draw_fish(fish, i, j, color):
+    fish.penup()
+    fish.goto(i, j)
+    fish.pendown()
+    fish.color(color)
+    fish.begin_fill()
+    fish.left(45)
+    fish.forward(30)  # size 
+    fish.right(135)
+    fish.forward(40)  # size
+    fish.right(130)
+    fish.forward(30)  # size
+    fish.left(90)
+    fish.right(90)
+    fish.circle(60, 90)  # size
+    fish.left(90)
+    fish.circle(60, 90)  # size
+    fish.end_fill()
+    fish.penup()
+    fish.hideturtle()
+
+# fish positions
+draw_fish(fish1, -50, -70, "lightpink")
+draw_fish(fish2, 100, -30, "lightblue")
+draw_fish(fish3, -130, -19, "lightgreen")
+
+# purple sea urhcin
+seashell1.penup()
+seashell1.goto(-190, split_y - 50)  # location on beach
+seashell1.pendown()
+seashell1.left(90)
+seashell1.color("purple")
+draw_special(seashell1, 10, 4, 6, 5)  # size
+
+# Green sea urchin
+seashell2.penup()
+seashell2.goto(170, split_y - 50)  # location on beach
+seashell2.pendown()
+seashell2.left(90)
+seashell2.color("green")
+draw_special(seashell2, 10, 4, 6, 5)  # size
+
+# drawing sun with rays
+draw_sun_with_rays()
+
+wn.update()
+
+turtle.done()
